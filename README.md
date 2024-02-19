@@ -76,7 +76,7 @@ That is a bit tricky, but there are different options.
 
 https://htmx.org/attributes/hx-on/
 
-if you set a `hx-on::after-request attribute`, the `CustomEvent` passed to it, will contain both
+if you set a `hx-on::after-request` attribute, the `CustomEvent` passed to it, will contain both
 the request, as well as the DOM-Target.
 
 ```javascript
@@ -104,19 +104,19 @@ All that is left, is to give your HTMX-Element the Event-Attribute.
 
 https://api.jquery.com/on/
 
-When manipulating events via JQuery it is possible to assign events, to a parent
-element whos decendents will then become the interactive elements
+When manipulating events via JQuery it is possible to assign events to a parent
+element whos decendants will then become the interactive elements.
 
-for example:
+For example:
 
 ```javascript
 $(document).on("click", "BUTTON", () => console.log("button clicked"));
 ```
 
-in this case the event is registered on the `document`, but it will only trigger, if
+In this case the event is registered on the `document` but it will only trigger, if
 any `BUTTON` within the `document` is clicked.
-That way, it does not matter, how many buttons are added or removed, since the event
-is not bound to the button, but the container, the button is in.
+That way it does not matter how many buttons are added or removed since the event
+is not bound to the buttons container.
 
 Unlike
 
@@ -124,5 +124,5 @@ Unlike
 $("BUTTON").on("click", () => ... );
 ```
 
-which is a bit more less performance hungy maybe, but requires an execution,
+which is maybe a bit less performance hungy on click, but requires an execution
 when ever Buttons are added or removed in the DOM.
