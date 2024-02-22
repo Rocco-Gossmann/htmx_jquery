@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<script type="text/javascript" src="./js/htmx.min.js"></script>
+		<script
+			type="text/javascript"
+			src="./js/jquery-4.0.0-beta.min.js"
+		></script>
+
+		<script>
+
+			// Step 1, create a HTMX - Elements via JQuery
+			$(document).ready(() => {
+				// Step 1a  create an element for the user to click on
+				const $trigger = $(`
+					<div class="myTriggerElement"
+						 hx-get="/api/time.php" 
+					     hx-target=".time-target" 
+					     hx-headers="{&quot;SomeInsecureHeader&quot;: &quot;*giggles* I'm in danger (For the love of god, don't put security relevant headers here)&quot;}"  
+					     hx-trigger="click, load"
+					> Click here to update Time </div>
+				`);
+
+
+				// Step 1b  create an element to act as the target for the triggers result
+				const $target = $(
+					` <div>Time: <span class="time-target"></span></div> `
+				);
+
+				// (And yes, we could create these two element directly down in HTML, but this is her, to test how dynamic ELement creation works in connection with HTMX.)
+
+
+				// 1c Hook everything up to the Body
+				$("BODY").append($trigger).append($target);
+
+				// Step 1d
+				// We need to tell HTMX, that the Trigger exists, so it can hook up its event-handlers and react to interactions
+				htmx.process($trigger[0]);
+				// This is also when the hx-trigger="load" is executed
+
+				// Step 2
+				// Once the Time updates, the Server will also respond with a new Button, that contains data, that can be processed via
+				// JavaScript/JQuery
+				// So we tell the $target to listen for events on the element returned by the server
+				// (in this case identified by the class "msg-button")
+				$target.on("click", ".msg-button", function (ev) {
+					alert($(ev.target).data("msg"));
+				});
+
+				// in this case HTMX only replaces the content of the target, not the target itself.
+				// So this is the easiest way to handle click events on elements generated via HTMX
+			});
+		</script>
+
+		<style>
+			.myTriggerElement {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body></body>
+</html>

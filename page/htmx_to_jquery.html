@@ -1,0 +1,21 @@
+
+<button id="htmx_jquery_button">
+	Button returned by HTMX and maded Interactive by JQuery
+</button>
+
+<script>
+	// When loading new javascript via HTMX it is important to create a new scope
+	// first otherwise we could get
+	// "Constant / Variable already defined" errors, or overwrite important
+	// global context
+
+	(function () {
+		const $btn = $("#htmx_jquery_button");
+
+		$btn.on("click", (ev) => {
+			ev.preventDefault();
+
+			alert("Hello from the HTMX / JQuery Button");
+		});
+	})();
+</script>

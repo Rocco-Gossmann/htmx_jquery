@@ -4,44 +4,15 @@ a short project, to check, how JQuery and HTMX can interact with each other.
 
 turns out, it is supprisingly simple.
 
-# How to run it
 
-The whole test can be run via a PHP-Development Server.
 
-install the PHP and PHP-CLI for your System (min. PHP 7.4)
 
-Then clone this project.
 
-```bash
-git clone https://github.com/rocco-gossmann/htmx_jquery
-```
 
-Enter the directory you just cloned
 
-```bash
-cd htmx_jquery
-```
+# Further notes
 
-Run the PHP-Development Server
-
-```bash
-php -S localhost:3753
-```
-
-goto http://localhost:3753 to see if it works.
-
-# How does it work
-
-A click on the `click here to update Time` message will make a call to PHP-Server
-`api/time.php`. The Time displayed always comes from the Server.
-
-A cookie will keep track of how often the API-Script has been called.
-
-the API will then return some markup, that is put into the Document via HTMX.
-
-Returned Markup also contain a Button, whos interactionn is handled via JQuery.
-
-# Creating HTMX-Elements via JQuery
+## Creating HTMX-Elements via JQuery
 
 To createHTMX elements, via JQuery, you would do it as you would with any other element.
 
@@ -68,11 +39,12 @@ and then call `htmx.process` on directly on the added DOM element
 htmx.process($trigger[0]);
 ```
 
-# Using JQuery to make via HTMX returned Markup interactive.
+
+## Using JQuery to make via HTMX returned Markup interactive.
 
 That is a bit tricky, but there are different options.
 
-## `hx-on::after-request`
+### `hx-on::after-request`
 
 https://htmx.org/attributes/hx-on/
 
@@ -100,7 +72,7 @@ All that is left, is to give your HTMX-Element the Event-Attribute.
 <div ... ... hx-on::after-request="onAfterRequest(event)">...</div>
 ```
 
-## JQuerys `decendet-selector`
+### JQuerys `decendet-selector`
 
 https://api.jquery.com/on/
 
@@ -116,7 +88,7 @@ $(document).on("click", "BUTTON", () => console.log("button clicked"));
 In this case the event is registered on the `document` but it will only trigger, if
 any `BUTTON` within the `document` is clicked.
 That way it does not matter how many buttons are added or removed since the event
-is not bound to the buttons container.
+is bound to the buttons container.
 
 Unlike
 

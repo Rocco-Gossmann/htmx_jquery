@@ -1,0 +1,17 @@
+<script>
+	// Not much to say here, HTMX will exectute, what ever the server responds with
+	alert("Hello from HTMX")
+
+	// This script will execute as if it was part of the initial page load
+
+	//But that also means it shares the same scope/context as any other script 
+	// loaded initialy or via HTMX
+	try {
+		let a = 1;
+		// /\-- Meaning, that this line here will cause an error, after 
+		//      the button has been pressed more than once
+	} catch(e) {
+		console.error(e);	
+	}
+
+</script>
