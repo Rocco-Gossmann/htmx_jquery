@@ -4,12 +4,17 @@
 		<title>HTMX + JQuery - Demo</title>
 
 		<link rel="stylesheet" type="text/css" href="./vendor/pico.classless.jade.min.css" />
+
 		<script type="text/javascript" src="./vendor/htmx.min.js"></script>
+
 		<script
 			type="text/javascript"
 			src="./vendor/jquery-4.0.0-beta.min.js"
 		></script>
 
+		<!-- [[=================================================================
+		| Just some Stuff to make the Menu a bit more interactive
+		===================================================================]]-->
 		<script>
 			let currentStep = 0;
 
@@ -29,27 +34,31 @@
 		</script>
 
 		<style>
-			* {
-				font-family: Consolas, Tahoma, Arial, Helvetica, sans-serif;
+			BODY {
+				padding: 1rem;
 			}
-
-			A {
-				text-decoration: none;
-			}
-
 			.mainnavi-entry {
-				display: list-item;
+				display: list-item;		/* <- Changing this back, since PicoCSS modifies it */
 				list-style-type: none;
 			}
 
-			/* Bodys "step_" class defines what navi entrie will be active */
+			/* Bodys "step_" class defines what navi entrie will be highlighted */
 			.step_1 .mainnavi-entry:has(A[data-step="1"]),
 			.step_2 .mainnavi-entry:has(A[data-step="2"]) {
 				list-style-type: initial;
-			}
+
 		</style>
 	</head>
 	<body data-theme="dark">
+		<nav>
+			<h1>HTMX + JQuery - Demo</h1>
+		</nav>
+
+		<p>
+			Open your Browser Developer-Tools and Network Tab, then click one
+			of the points below and see, what it does
+		</p>
+
 		<aside class="mainnavi">
 			<ul>
 				<li class="mainnavi-entry">
@@ -76,5 +85,6 @@
 		</aside>
 
 		<div id="page-content"></div>
+
 	</body>
 </html>
